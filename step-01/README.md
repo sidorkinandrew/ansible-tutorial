@@ -1,6 +1,6 @@
 # Ansible tutorial: Inventory
 
-The default place for inventory - a file is  `/etc/ansible/hosts`. 
+The default place for inventory - a file is  `/etc/ansible/hosts`.
 [configurable via environment variable `ANSIBLE_INVENTORY`, or the `-i` flag.
 
 `ansible_host` is a special _variable_ that sets the IP ansible will use when
