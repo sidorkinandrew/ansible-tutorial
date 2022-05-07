@@ -1,0 +1,50 @@
+---
+- hosts: web
+  tasks:
+    - name: Installs apache web server
+      become: yes
+      apt:
+        pkg: apache2
+        state: present
+        update_cache: true
+
+    - name: Push default virtual host configuration
+      become: yes
+      copy:
+        src: files/my-new-awesome-app
+        dest: /etc/apache2/sites-available/my-new-awesome-app.conf
+        mode: 0640
+      notify:
+        - restart apache
+
+    - name: Activates our virtualhost
+      become: yes
+      file:
+        src: /etc/apache2/sites-available/my-new-awesome-app.conf
+        dest: /etc/apache2/sites-enabled/my-new-awesome-app.conf
+        state: link
+      notify:
+        - restart apache
+
+    - name: Disable the default virtualhost
+      become: yes
+      file:
+        dest: /etc/apache2/sites-enabled/000-default.conf
+        state: absent
+      notify:
+        - restart apache
+
+    - name: Disable the default ssl virtualhost
+      become: yes
+      file:
+        dest: /etc/apache2/sites-enabled/default-ssl.conf
+        state: absent
+      notify:
+        - restart apache
+
+  handlers:
+    - name: restart apache
+      become: yes
+      service:
+        name: apache2
+        state: restarted
