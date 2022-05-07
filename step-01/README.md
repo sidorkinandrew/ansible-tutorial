@@ -19,4 +19,4 @@ Let's run ad-hoc module command -
 ansible -m ping all -i step-01/hosts
 ```
 
-Done? proceed to [step-02](./step-02/README.md)
+Done? proceed to [step-02](../step-02/)

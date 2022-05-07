@@ -52,4 +52,4 @@ In our case `host0` variables will be searched in those files -
 - `host_vars/host0`   # host_vars - variables for hosts files
 
 
-Done? proceed to [step-04](./step-04/README.md)
+Done? proceed to [step-04](../step-04/)

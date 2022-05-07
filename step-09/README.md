@@ -25,4 +25,4 @@ You can also peek at HAProxy's statistics at
 [http://192.168.33.10/haproxy?stats](http://192.168.33.10/haproxy?stats).
 
 
-Done? proceed to [step-10](./step-10/README.md)
+Done? proceed to [step-10](../step-10/)

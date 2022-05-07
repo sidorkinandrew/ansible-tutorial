@@ -18,4 +18,4 @@ Let's run the playbook -
 $ ansible-playbook -i step-06/hosts step-06/apache.yml
 ```
 
-Done? proceed to [step-07](./step-07/README.md)
+Done? proceed to [step-07](../step-07/)

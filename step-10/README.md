@@ -52,4 +52,4 @@ for i in {0..100}; do curl 192.168.33.10; done
 ```
 
 
-Done? proceed to [step-11](./step-11/README.md)
+Done? proceed to [step-11](../step-11/)

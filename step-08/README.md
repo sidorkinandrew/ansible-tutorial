@@ -31,4 +31,4 @@ Note: the `tags: deploy` allows for direct executing only this part of the playb
 $ ansible-playbook -i step-08/hosts step-08/apache.yml -t deploy
 ```
 
-Done? proceed to [step-09](./step-09/README.md)
+Done? proceed to [step-09](../step-09/)
