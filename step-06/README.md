@@ -17,3 +17,5 @@ Let's run the playbook -
 ```bash
 $ ansible-playbook -i step-06/hosts step-06/apache.yml
 ```
+
+Done? proceed to [step-07](./step-07/README.md)

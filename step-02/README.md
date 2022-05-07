@@ -42,3 +42,5 @@ ansible -i step-02/hosts -m setup -a 'filter=ansible_memtotal_mb' all
 
 - `host0:host1` would run on host0 and host1
 - `host*` would run on all hosts starting with 'host' and ending with ''
+
+Done? proceed to [step-03](./step-03/README.md)

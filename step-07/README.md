@@ -33,3 +33,5 @@ the scripts proceeds as usual, skipping the steps tagged with the `when` conditi
 
 The `register` keyword records output from a command (exit status, stdout, stderr, ...), 
 and `when: result is failed` checks if the registered variable (`result`) contains a failed status.
+
+Done? proceed to [step-08](./step-08/README.md)

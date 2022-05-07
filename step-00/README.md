@@ -21,3 +21,4 @@ cat /etc/ansible/ansible.cfg  | grep host_key_checking
 # host_key_checking = False
 ```
 
+Done? proceed to [step-01](./step-01/README.md)

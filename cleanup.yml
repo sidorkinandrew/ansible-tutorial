@@ -1,0 +1,16 @@
+---
+- hosts: all
+  tasks:
+    - name: Uninstalling Apache and necessary packages
+      become: yes
+      apt:
+        pkg: ["apache2", "libapache2-mod-php", "git", "unzip", "haproxy"]
+        state: absent
+        update_cache: true
+
+    - name: Clear up a www sub-directory for the app
+      become: yes
+      file:
+        path: /var/www/my-new-awesome-app
+        state: absent
+        mode: 0755
