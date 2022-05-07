@@ -1,0 +1,75 @@
+---
+- hosts: web
+  tasks:
+    - name: Installs Apache and necessary packages
+      become: yes
+      apt:
+        pkg: ["apache2", "libapache2-mod-php", "git", "unzip"]
+        state: latest
+        update_cache: true
+
+    - name: Push default virtual host configuration
+      become: yes
+      copy:
+        src: files/my-new-awesome-app
+        dest: /etc/apache2/sites-available/my-new-awesome-app.conf
+        mode: 0640
+      notify:
+        - restart apache
+
+    - name: Activates our virtualhost
+      become: yes
+      command: a2ensite my-new-awesome-app
+
+    - name: Check that our config is valid
+      become: yes
+      command: apache2ctl configtest
+      register: result
+      ignore_errors: true
+
+    - name: Rolling back - Restoring old default virtualhost
+      become: yes
+      command: a2ensite 000-default
+      when: result is failed
+
+    - name: Rolling back - Removing our virtualhost
+      become: yes
+      command: a2dissite my-new-awesome-app
+      when: result is failed
+
+    - name: Rolling back - Ending playbook
+      fail:
+        msg: "Configuration file was not valid, the deployment failed. Please recheck it before re-running the playbook."
+      when: result is failed
+
+    - name: Clear up a www sub-directory for the app
+      become: yes
+      file:
+        path: /var/www/my-new-awesome-app
+        state: absent
+        mode: 0755
+
+    - name: Deploy our awesome application
+      become: yes
+      git:
+        repo: https://github.com/rampatra/wedding-website.git
+        dest: /var/www/my-new-awesome-app
+      tags: deploy
+
+    - name: Deactivates the default virtualhost
+      become: yes
+      command: a2dissite 000-default
+
+    - name: Deactivates the default ssl virtualhost
+      become: yes
+      command: a2dissite default-ssl
+      notify:
+        - restart apache
+
+  handlers:
+    - name: restart apache
+      become: yes
+      service:
+        name: apache2
+        state: restarted
+
